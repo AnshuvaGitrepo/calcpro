@@ -3,6 +3,7 @@
   "productName": "CalcPro",
   "description": "Calculator, unit converter and live currency converter",
   "author": "AnshuvaGitrepo",
+  "license": "MIT",
   "private": true,
   "version": "1.0.2",
   "type": "module",

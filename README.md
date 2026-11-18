@@ -77,4 +77,4 @@ Icons for all platforms come from `scripts/make-icons.py` (Python + Pillow):
 
 ## License
 
-Copyright 2026 AnshuvaGitrepo. All rights reserved.
+[MIT](LICENSE) © 2026 AnshuvaGitrepo.
