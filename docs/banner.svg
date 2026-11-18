@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22262b"/>
+      <stop offset="1" stop-color="#121417"/>
+    </linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2e33"/>
+      <stop offset="1" stop-color="#17191c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f5a524" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#f5a524" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="320" fill="url(#bg)"/>
+  <rect width="1280" height="320" fill="url(#glow)"/>
+
+  <!-- app icon -->
+  <g transform="translate(96 96)">
+    <rect width="128" height="128" rx="28" fill="url(#tile)" stroke="#3a3f45" stroke-width="2"/>
+    <rect x="24" y="24" width="36" height="36" rx="10" fill="#3a3f45"/>
+    <rect x="68" y="24" width="36" height="36" rx="10" fill="#3a3f45"/>
+    <rect x="24" y="68" width="36" height="36" rx="10" fill="#3a3f45"/>
+    <rect x="68" y="68" width="36" height="36" rx="10" fill="#f5a524"/>
+    <rect x="77" y="80" width="18" height="4" rx="2" fill="#1b1406"/>
+    <rect x="77" y="88" width="18" height="4" rx="2" fill="#1b1406"/>
+  </g>
+
+  <!-- title -->
+  <text x="268" y="158" font-family="Manrope, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="800" fill="#edebe6" letter-spacing="-1.5">CalcPro</text>
+  <text x="270" y="204" font-family="Manrope, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="26" font-weight="500" fill="#9298a0">Calculator, unit converter and live currency rates</text>
+  <text x="270" y="240" font-family="Manrope, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#f5a524">For Android, Windows and the web. Works offline.</text>
+
+  <!-- keypad motif -->
+  <g transform="translate(936 54)" font-family="Manrope, 'Segoe UI', Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="236" y="40" font-size="44" fill="#edebe6" text-anchor="end">1,024</text>
+    <g font-size="22">
+      <rect x="0" y="62" width="56" height="44" rx="12" fill="#34393f"/><text x="28" y="92" fill="#edebe6">7</text>
+      <rect x="62" y="62" width="56" height="44" rx="12" fill="#2a2e33"/><text x="90" y="92" fill="#edebe6">8</text>
+      <rect x="124" y="62" width="56" height="44" rx="12" fill="#2a2e33"/><text x="152" y="92" fill="#edebe6">9</text>
+      <rect x="186" y="62" width="56" height="44" rx="12" fill="#34393f"/><text x="214" y="92" fill="#f5a524">×</text>
+      <rect x="0" y="112" width="56" height="44" rx="12" fill="#34393f"/><text x="28" y="142" fill="#edebe6">4</text>
+      <rect x="62" y="112" width="56" height="44" rx="12" fill="#2a2e33"/><text x="90" y="142" fill="#edebe6">5</text>
+      <rect x="124" y="112" width="56" height="44" rx="12" fill="#2a2e33"/><text x="152" y="142" fill="#edebe6">6</text>
+      <rect x="186" y="112" width="56" height="44" rx="12" fill="#34393f"/><text x="214" y="142" fill="#f5a524">−</text>
+      <rect x="0" y="162" width="56" height="44" rx="12" fill="#34393f"/><text x="28" y="192" fill="#edebe6">1</text>
+      <rect x="62" y="162" width="56" height="44" rx="12" fill="#2a2e33"/><text x="90" y="192" fill="#edebe6">2</text>
+      <rect x="124" y="162" width="56" height="44" rx="12" fill="#2a2e33"/><text x="152" y="192" fill="#edebe6">3</text>
+      <rect x="186" y="162" width="56" height="44" rx="12" fill="#f5a524"/><text x="214" y="192" fill="#1b1406">=</text>
+    </g>
+  </g>
+</svg>
