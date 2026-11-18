@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ——— THEMES ———
+   Graphite: warm charcoal instrument body, amber signal for operators and "=".
+   Paper: off-white desk calculator, ink-blue signal.
+   Ocean: deep navy, sea-glass teal signal. */
+[data-theme="dark"] {
+  --bg: #17191c;
+  --surface: #1f2226;
+  --key: #2a2e33;
+  --key-func: #34393f;
+  --key-op: #34393f;
+  --text: #edebe6;
+  --muted: #9298a0;
+  --dim: #5d636b;
+  --line: rgba(255,255,255,0.07);
+  --accent: #f5a524;
+  --on-accent: #1b1406;
+  --danger: #ff6b5e;
+  --key-edge: rgba(255,255,255,0.05);
+  --shadow: rgba(0,0,0,0.35);
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  --bg: #eceae5;
+  --surface: #f6f5f1;
+  --key: #ffffff;
+  --key-func: #e1ded6;
+  --key-op: #e1ded6;
+  --text: #1f2226;
+  --muted: #6b6f76;
+  --dim: #a3a6ab;
+  --line: rgba(31,34,38,0.09);
+  --accent: #1f5bd6;
+  --on-accent: #ffffff;
+  --danger: #c62f22;
+  --key-edge: rgba(31,34,38,0.06);
+  --shadow: rgba(31,34,38,0.12);
+  color-scheme: light;
+}
+[data-theme="ocean"] {
+  --bg: #0b1724;
+  --surface: #10202f;
+  --key: #16293a;
+  --key-func: #1d3449;
+  --key-op: #1d3449;
+  --text: #e3edf5;
+  --muted: #8aa3b8;
+  --dim: #4f6a82;
+  --line: rgba(160,200,235,0.09);
+  --accent: #34d1bf;
+  --on-accent: #052421;
+  --danger: #ff7a70;
+  --key-edge: rgba(160,200,235,0.06);
+  --shadow: rgba(0,0,0,0.4);
+  color-scheme: dark;
+}
+
+/* ——— base ——— */
+html, body, #root { height: 100%; }
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Manrope Variable", "Manrope", system-ui, sans-serif;
+  font-feature-settings: "tnum" 1; /* digits line up in the display and lists */
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;              /* the app shell scrolls inside, never the page */
+  overscroll-behavior: none;     /* no pull-to-refresh / rubber band */
+  transition: background-color .3s ease, color .3s ease;
+}
+button, [role="button"] {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+button:disabled { cursor: default; }
+input, select { font-size: 16px; } /* stops mobile browsers zooming on focus */
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.scroll-y { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.scrollbar-hide { scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+* { scrollbar-width: thin; scrollbar-color: var(--dim) transparent; }
+
+/* ——— app shell: header / content / tab bar, sized to the real viewport ——— */
+/* height caps for the result text: share of the screen height it may use */
+:root { --big-cap: 11vh; --err-cap: 7vh; }
+@media (orientation: landscape) and (max-height: 540px) {
+  :root { --big-cap: 17vh; --err-cap: 9vh; }
+}
+
+.shell {
+  height: 100%;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr); /* never wider than the screen, whatever a child wants */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ——— keys ——— */
+.key {
+  position: relative;
+  border-radius: var(--key-radius, 18px);
+  background: var(--key);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 var(--key-edge), 0 1px 2px var(--shadow);
+  font-weight: 600;
+  transition: transform .08s ease, filter .08s ease, background-color .3s ease;
+  min-width: 0;
+  min-height: 0;
+}
+.key:active { transform: scale(.96); filter: brightness(1.18); }
+.key-func { background: var(--key-func); }
+.key-op   { background: var(--key-op); color: var(--accent); }
+.key-eq   { background: var(--accent); color: var(--on-accent); }
+.key-sci  { background: transparent; box-shadow: inset 0 0 0 1px var(--line); color: var(--text); opacity: .85; font-weight: 600; }
+.key-sci:active { background: var(--key); }
+@media (hover: hover) and (pointer: fine) {
+  .key:hover { filter: brightness(1.08); }
+  .key-sci:hover { color: var(--text); filter: none; }
+}
+
+/* small round toolbar buttons */
+.tool {
+  height: 40px; min-width: 40px;
+  padding: 0 10px;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  color: var(--muted);
+  font-size: 13px; font-weight: 700;
+  transition: background-color .15s ease, color .15s ease;
+}
+.tool[aria-pressed="true"] { color: var(--accent); background: var(--surface); }
+@media (hover: hover) and (pointer: fine) { .tool:hover { color: var(--text); background: var(--surface); } }
+
+/* field card used by the converters; the whole card shows focus, not the bare input */
+.field {
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: box-shadow .15s ease;
+}
+.field:focus-within { box-shadow: inset 0 0 0 2px var(--accent); }
+.field input:focus-visible { outline: none; }
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--key) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23888' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--text);
+  border-radius: 12px;
+  height: 40px;
+  padding: 0 34px 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  max-width: 100%;
+  min-width: 0;
+  text-overflow: ellipsis;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.select option { background: var(--surface); color: var(--text); }
+
+/* ——— motion ——— */
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes sheet { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.result-in { animation: rise .18s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

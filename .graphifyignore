@@ -1,0 +1,11 @@
+graphify-out/
+node_modules/
+dist/
+public/favicon.svg
+public/icons/
+src/assets/
+android/
+release/
+build/
+keys/
+electron-dist/

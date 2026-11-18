@@ -1,0 +1,9 @@
+{
+  "appId": "com.anshuva.calcpro",
+  "appName": "CalcPro",
+  "webDir": "dist",
+  "backgroundColor": "#17191c",
+  "android": {
+    "allowMixedContent": false
+  }
+}

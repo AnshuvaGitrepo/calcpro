@@ -1,0 +1,76 @@
+{
+  "name": "calcpro",
+  "productName": "CalcPro",
+  "description": "Calculator, unit converter and live currency converter",
+  "author": "AnshuvaGitrepo",
+  "private": true,
+  "version": "1.0.2",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "test": "node tests/calcEngine.test.mjs",
+    "electron": "vite build && electron .",
+    "dist:win": "vite build && electron-builder --win nsis portable",
+    "android:sync": "vite build && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/haptics": "^8.0.2",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "autoprefixer": "^10.6.1",
+    "electron": "^45.3.4",
+    "electron-builder": "^26.18.0",
+    "oxlint": "^1.88.0",
+    "postcss": "^8.5.31",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.3.4"
+  },
+  "build": {
+    "appId": "com.anshuva.calcpro",
+    "productName": "CalcPro",
+    "copyright": "Copyright 2026 AnshuvaGitrepo",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "!dist/_preview.html",
+      "electron/**/*",
+      "build/icon.png",
+      "package.json",
+      "!node_modules/**/*"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": true
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CalcPro",
+      "artifactName": "CalcPro-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "CalcPro-${version}-portable.${ext}"
+    }
+  }
+}
