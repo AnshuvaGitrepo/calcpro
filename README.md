@@ -153,3 +153,8 @@ Icons for every platform come from `scripts/make-icons.py` (Python + Pillow): `p
 ## License
 
 [MIT](LICENSE) © 2026 AnshuvaGitrepo
+
+<p align="center">
+  <img src="public/favicon.svg" alt="CalcPro logo" width="72"><br>
+  <sub>Prepared by Anshuva Samanta</sub>
+</p>
